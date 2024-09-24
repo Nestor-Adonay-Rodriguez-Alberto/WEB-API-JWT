@@ -1,4 +1,5 @@
 ﻿using API_RESTful.Models;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Transferencia_Datos.Producto_DTO;
@@ -6,6 +7,7 @@ using Transferencia_Datos.Producto_DTO;
 
 namespace API_RESTful.Controllers
 {
+    [Authorize]
     [Route("api/[controller]")]
     [ApiController]
     public class ProductoController : ControllerBase

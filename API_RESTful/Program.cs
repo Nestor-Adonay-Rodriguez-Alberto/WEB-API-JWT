@@ -31,6 +31,12 @@ builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
         };
     });
 
+// Politica De Autorizacion:
+builder.Services.AddAuthorization(options => 
+{
+    options.AddPolicy("SuperAdmin", policy=> policy.RequireClaim("AdminType","Ingeniero"));
+});
+
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.

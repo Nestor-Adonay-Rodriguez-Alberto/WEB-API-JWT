@@ -53,7 +53,8 @@ namespace API_RESTful.Controllers
             var Claims = new[]
             {
                 new Claim(ClaimTypes.Name, administrador.Nombre),
-                new Claim(ClaimTypes.Email, administrador.Email)
+                new Claim(ClaimTypes.Email, administrador.Email),
+                new Claim("AdminType", administrador.Rol),
             };
 
             // Obtengon en Bytes la Key:

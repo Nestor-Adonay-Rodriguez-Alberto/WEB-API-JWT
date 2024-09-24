@@ -2,6 +2,7 @@
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using System.ComponentModel.DataAnnotations;
 using Transferencia_Datos.Administrador_DTO;
 
 // For more information on enabling Web API for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
@@ -50,6 +51,7 @@ namespace API_RESTful.Controllers
 
 
         // RECIBE UN OBJETO Y LO GUARDA EN LA DB:
+        [Authorize(Policy = "SuperAdmin")]
         [HttpPost]
         public async Task<IActionResult> Post([FromBody] Crear_Administrador_DTO crear_Administrador_DTO)
         {
@@ -68,7 +70,7 @@ namespace API_RESTful.Controllers
             return Ok("Guardado Correctamente");
         }
 
-
+        [Authorize(Policy = "SuperAdmin")]
         [HttpDelete("{id}")]
         public async Task<IActionResult> Delete(int id)
         {

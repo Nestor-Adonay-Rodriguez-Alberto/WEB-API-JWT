@@ -47,6 +47,7 @@ namespace API_RESTful.Controllers
 
 
         // RECIBE UN OBJETO Y LO GUARDA EN LA DB:
+        [Authorize(Policy = "SuperAdmin")]
         [HttpPost]
         public async Task<IActionResult> Post([FromBody] Crear_Producto_DTO crear_Producto_DTO)
         {
@@ -63,7 +64,7 @@ namespace API_RESTful.Controllers
             return Ok("Guardado Correctamente");
         }
 
-
+        [Authorize(Policy = "SuperAdmin")]
         [HttpDelete("{id}")]
         public async Task<IActionResult> Delete(int id)
         {

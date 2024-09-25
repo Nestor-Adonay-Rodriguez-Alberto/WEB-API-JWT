@@ -35,13 +35,24 @@ namespace API_RESTful.Controllers
 
             if (Objeto_Obtenido == null)
             {
-                return NotFound("¡Error!... Credenciales Incorrectas.");
+                return NotFound(Objeto_Obtenido);
             }
 
             // Generamos el Token:
             string JwtToken = Generar_Token(Objeto_Obtenido);
 
-            return Ok(new { Token = JwtToken });
+            // Objeto a Retornar:
+            Autenticado_DTO Autenticado = new Autenticado_DTO
+            {
+                IdAdmin = Objeto_Obtenido.IdAdmin,
+                Nombre = Objeto_Obtenido.Nombre,
+                Email = Objeto_Obtenido.Email,
+                Contraseña = Objeto_Obtenido.Contraseña,
+                Rol = Objeto_Obtenido.Rol,
+                Token = Generar_Token(Objeto_Obtenido)
+            };
+
+            return Ok(Autenticado);
         }
 
 

@@ -26,17 +26,18 @@ namespace API_RESTful.Controllers
 
 
         // OBTIENE TODOS LOS REGISTROS DE LA DB:
+        [Authorize(Policy = "SuperAdmin")]
         [HttpGet]
         public async Task<IActionResult> Get()
         {
             List<Administrador> Objetos_Obtenidos = await _MyDBcontext.Administradores.ToListAsync();
 
-            List<ObtenerPorId_DTO> Lista_Administradores = new List<ObtenerPorId_DTO>();
+            ObtenerPorId_DTO Administradores = new ObtenerPorId_DTO();
 
             // Agregamos los registros obtenidos a la lista que mandaremos:
             foreach (Administrador administrador in Objetos_Obtenidos)
             {
-                Lista_Administradores.Add(new ObtenerPorId_DTO
+                Administradores.Lista_Administradores.Add(new ObtenerPorId_DTO.Administrador
                 {
                     IdAdmin = administrador.IdAdmin,
                     Nombre = administrador.Nombre,
@@ -44,9 +45,10 @@ namespace API_RESTful.Controllers
                     Contraseña=administrador.Contraseña,
                     Rol=administrador.Rol
                 });
+
             }
 
-            return Ok(Lista_Administradores);
+            return Ok(Administradores);
         }
 
 
